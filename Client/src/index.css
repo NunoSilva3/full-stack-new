@@ -1,0 +1,169 @@
+body{
+  font-family: 'Bree Serif', serif !important;
+
+}
+#react_textcenter{
+  text-align: center;
+  -webkit-text-fill-color: red
+  
+  }
+  .formStyle input{
+    
+    background: transparent;
+    border: 1px solid white;
+    margin: 1px;
+  
+  }
+  .formStyle button{
+  
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(126,126,242,1) 35%, rgba(0,212,255,1) 100%); 
+    border-radius: 50px;
+    border: transparent;
+    margin-top: 3px;
+  }
+  .register_form {
+    display: flex;
+    flex-direction: column;
+    width:20%;
+    margin:auto;
+    border:1px solid #ddd;
+    padding:20px;
+    margin-top: 15%;
+  }
+  
+  .register_form  input, button{
+    padding:10px;
+    outline: none;
+    
+  }
+  
+  button:hover{
+    background: rgb(77, 193, 247);
+  }
+.homepagepic {
+  height: 74vh;
+  width: 74vw;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+.homepagepic img{
+  max-width: 100%;
+}
+.homepagepic a{
+margin: auto;
+}
+.homepagepic span{
+margin: auto
+}
+i {
+  cursor: pointer
+}
+#HomeCatName{
+  text-align: center;
+  margin-top: 70px;
+}
+.FullPageGridCat{
+  height: 75vh;
+  width: 75vw;
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  grid-gap: 1%;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  padding: 0
+
+
+
+}
+.FullPageGridCat img{
+  max-width: 100%;
+  border-radius: 10px;
+}
+.FullPageGridCat li{
+  font-size: 150%;
+
+}
+
+
+.FullPageGrid{
+  height: 75vh;
+  width: 75vw;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  grid-gap: 1%;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  justify-content: space-around;
+  text-align: center;
+  padding: 0;
+  flex-wrap: wrap
+
+}
+.FullPageGrid img{
+  max-width: 100%;
+  border-radius: 10px;
+}
+.FullPageGrid li{
+  font-size: 150%;
+  min-width: 300px;
+  word-break: break-all;
+}
+
+.FullPageGrid p{
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+
+
+#CreatePost{
+text-align: center;
+margin-top: 10%
+}
+.CreatePost{
+  width:20%;
+  margin:auto;
+  border:1px solid #ddd;
+  padding:20px;
+  margin-top: 15%;
+}
+.lines{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;  /* Number of lines displayed before it truncate */
+   /* overflow: hidden; */
+}
+.search {
+  width: 30rem;
+  margin: 10rem auto 2rem auto;
+  text-align: right;
+  position: relative;
+}
+
+
+.myAccountgrid{
+
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15%;
+  grid-gap: 1%;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+
+}
+
+.card {
+  padding: 2rem;
+  border: 1px solid #ddd;
+}
+.comments_grid:{
+  display: grid;
+}

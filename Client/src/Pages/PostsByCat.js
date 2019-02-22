@@ -39,7 +39,7 @@ export default class SinglePostPage extends React.Component{
             
                 <ul className='FullPageGrid'>
                     { this.state.arr.map( ele =>{                      
-                       return <li> <NavLink to={`/post/${ele._id}`}><h2>{ele.title}</h2><p>{ele.body}</p></NavLink></li>          
+                       return <li> <NavLink to={`/post/${ele._id}`}><h2>{ele.title}</h2><img src={`${ele.photo_url}`}></img><p>{ele.body}</p></NavLink></li>          
                     })}
                 </ul>
                 

@@ -1,7 +1,9 @@
 import React from 'react'
 import widgetStyle from './widgetStyle';
 
+
 export default class UploadImages extends React.Component{
+
 
 	uploadWidget = () => {
         debugger
@@ -16,7 +18,7 @@ export default class UploadImages extends React.Component{
                 if(error){
 					debugger
                 }else{
-									debugger
+									
 					fetch('http://localhost:3003/images/upload', {
 						method: 'POST',
 						headers: {
@@ -25,11 +27,11 @@ export default class UploadImages extends React.Component{
 						},
 						body: JSON.stringify({
 						  photo_url:result[0].secure_url, 
-						  public_id:result[0].public_id
+							public_id:result[0].public_id,
 						}),
 						}).then((response) => response.json())
 							.then((responseJson) => {
-								debugger
+								this.props.getData(result[0].secure_url)
 						}).catch((e)=>{
 							debugger
 						})

@@ -52,7 +52,6 @@ class PostsController {
         }
     }
     async create(req,res){
-        console.log(' BOOOODDDDDDYYYYYYY', req.body)
             let{ categoryID, userID, body , title , photo_url } =  req.body
 
             try{
@@ -63,6 +62,7 @@ class PostsController {
                     user_id:userID,
                     photo_url:photo_url,
                 })
+                console.log(newPost)
                res.send({newPost})
             }
             catch(error){

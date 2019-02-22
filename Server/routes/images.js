@@ -4,7 +4,7 @@ var router 		  = require('express').Router(),
 
 
     router.get('/find', controller.find)
-    router.post('/upload', isLoggedIn,  controller.addImages)
+    router.post('/upload', controller.addImages)
 
 
 

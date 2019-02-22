@@ -49,6 +49,12 @@ export default class CreatePost extends React.Component{
 
         }
 
+        getData = e =>{
+            console.log('PROOOOOOPS=======>', e)
+            this.setState({photo_url:e})
+
+        }
+
 
     render(){
 
@@ -68,9 +74,9 @@ export default class CreatePost extends React.Component{
                     value ={this.state.body} 
                     placeholder="Type your post here!"
                 />
-                <button>Create!</button>
+                <button>Create!</button>              
             </form>
-            <UploadImages/>
+            <UploadImages getData={this.getData}/>
             <alert>{`Post ${this.state.confirmation} created`}</alert>
             </div>
         )

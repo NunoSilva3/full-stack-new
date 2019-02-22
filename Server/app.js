@@ -2,6 +2,7 @@ var createError       = require('http-errors'),
     express           = require('express'),
     path              = require('path'),
     cookieParser      = require('cookie-parser'),
+    bodyParser        = require('body-parser'),
     logger            = require('morgan'),
     mongoose		      = require('mongoose'),
     indexRouter       = require('./routes/index'),
@@ -11,9 +12,14 @@ var createError       = require('http-errors'),
     commentsRouter    = require('./routes/comments'),
     imagesRouter      = require('./routes/images'),
     app               = express();
-    mongoose.connect('mongodb://localhost/DBtoTestApp');
+    mongoose.connect('mongodb://localhost/DBtoTestApp',()=>{
+      console.log('Connected to DB')
+    });
     var cors = require('cors') // to send request from different url
 
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // to enable cors for any requests
 // app.use(cors())
 
@@ -38,6 +44,8 @@ app.use('/images', imagesRouter)
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
 
 app.use(logger('dev'));
 app.use(express.json());

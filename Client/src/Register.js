@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios'
 
 export default class Register extends React.Component {
     state = {
@@ -22,7 +23,7 @@ export default class Register extends React.Component {
         e.preventDefault()
         if(password === passconfirm){
             this.setState({passvalid:true})
-        fetch('http://localhost:3001/users/register', {
+        fetch('http://localhost:3003/users/register', {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -35,9 +36,26 @@ export default class Register extends React.Component {
             }),
           }).then((response) => response.json())
               .then((responseJson) => {
+                  debugger
                 responseJson.error ? alert(responseJson.error): localStorage.setItem('authToken',JSON.stringify(responseJson.token))
                   
+                var url= 'http://localhost:3003/sendEmail'
+
+                axios.post(url, {
+                    email: this.state.email
+                }
+
+                    )
+                .then ((res)=>{
+                    debugger
+                    console.log(res.data)             
+                })
+                .catch((error)=>{
+                     
+                })
+            
         }).catch((e)=>{
+            debugger
             
         })
     } else {
@@ -55,7 +73,7 @@ export default class Register extends React.Component {
                 <input 
                     name ='username' 
                     value ={this.state.username} 
-                    placeholder="Name"
+                    placeholder="Username"
                 />
                 <input 
                     name ='email' 

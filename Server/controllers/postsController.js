@@ -1,13 +1,23 @@
 const Posts = require ('../models/Posts');
-
+const Comments = require ('../models/Comments')
 
 class PostsController {
 
     async find(req, res) {
         let {keyword} = req.params
+        if(keyword === "all"){
+            try{
+                const posts = await Posts.find( {  } )
+                return res.send(posts)
+            }
+            catch(error){
+                return console.log(error)
+            }
+
+        }
         try{
-            const posts = await Posts.find( { $text: { $search: keyword} } )
-            console.log(posts)
+            const posts = await Posts.find( { body: { $regex: keyword, $options:'i'} } )
+            res.send(posts)
         }
         catch(error){
             console.log(error)
@@ -40,11 +50,12 @@ class PostsController {
 
     }
     async find_by_user(req,res){
-        let{ userID } = req.params;
+        console.log('USER DATA', req.user)
 
         try{
-            const userPosts = await Posts.find({ user_id:userID})
-            console.log(userPosts)
+            const userPosts = await Posts.find({ user_id:req.user._id})
+            res.send(userPosts)
+
 
         }
         catch(error){
@@ -52,14 +63,15 @@ class PostsController {
         }
     }
     async create(req,res){
-            let{ categoryID, userID, body , title , photo_url } =  req.body
+
+            let{ categoryID, body , title , photo_url } =  req.body
 
             try{
                 const newPost = await Posts.create({
                     title:title,
                     body:body,
                     category_id:categoryID,
-                    user_id:userID,
+                    user_id:req.user._id,
                     photo_url:photo_url,
                 })
                 console.log(newPost)
@@ -67,6 +79,7 @@ class PostsController {
             }
             catch(error){
                 console.log("e r r o r ",error)
+                res.send({error})
             }
        
     }
@@ -90,14 +103,25 @@ class PostsController {
         }
     }
     async deletePost (req,res){
+        console.log(req.body)
         let{ PostID }= req.body
 
-        try{
-            const deleteOne = await Posts.deleteOne({_id : PostID })
-            res.send({deleteOne})
-        }
-        catch(error){
-            res.send({error})
+        try {
+            const myPosts = await Posts.find({_id: PostID})
+            console.log('==========>',myPosts)
+            let  postIds= myPosts.map(ele => ele._id)
+            const deleteOne = await Posts.deleteOne({_id: PostID})
+            console.log('deleteOne======>',deleteOne)
+           try {
+
+                const deleteComments = await Comments.deleteMany({post_id: {'$in':postIds}})
+                console.log('deleteComments======>',deleteComments)
+                           res.send({deleteOne})
+            } catch (error) {
+                console.log(error)
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 }

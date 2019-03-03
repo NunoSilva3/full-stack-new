@@ -7,6 +7,8 @@ import {
   BrowserRouter as Router,
 	Route
 } from 'react-router-dom'
+import PostsByCatLogged from './Pages/PostsByCatLogged';
+import PostsByCat from './Pages/PostsByCat';
 import Logout from './Logout';
 import HomePage  from './Pages/HomePage';
 import Categories  from './Pages/Categories';
@@ -16,9 +18,11 @@ import HomePageLogged from './Pages/HomePageLogged';
 import CategoriesLogged from './Pages/CategoriesLogged';
 import PostsLogged from './Pages/PostsLogged';
 import SinglePostPage from './Pages/SinglePostPage';
-import PostsByCat from './Pages/PostsByCat';
-import CreatePost from './Pages/CreatePost'
-import PostsByUser from './Pages/PostsByUser'
+import CreatePost from './Pages/CreatePost';
+import PostsByUser from './Pages/PostsByUser';
+import CreateCategory from './Pages/CreateCategory';
+import CategoriesByUser from './Pages/CatByUser'
+import CommentsByUser from './Pages/CommentsByUser'
 
 
 
@@ -67,6 +71,17 @@ class App extends Component {
               }
             }
         />
+         <Route 
+          path =  '/posts/:_id'
+           render = {
+              (props) =>{
+                if(isLoggedIn){
+                  return  <PostsByCatLogged {...props}/>
+                }else return <PostsByCat {...props}/>
+               
+              }
+            }
+        /> 
         <Route 
           path =  '/Search Posts'
            render = {
@@ -83,12 +98,16 @@ class App extends Component {
            component = {SinglePostPage}
         />
         <Route 
-          path =  '/posts/:categoryID'
-           component = {PostsByCat}
+          path =  '/MyPosts'
+           component = {PostsByUser}
         />
         <Route 
-          path =  '/MyPosts/:userID'
-           component = {PostsByUser}
+          path =  '/MyCategories'
+           component = {CategoriesByUser}
+        />
+        <Route 
+          path =  '/MyComments'
+           component = {CommentsByUser}
         />
         <Route 
           path =  '/login' 
@@ -101,8 +120,8 @@ class App extends Component {
         <Route 
           path =  '/My Account'
           render = {
-            () =>(
-              <MyAccount isLoggedIn = {this.isLoggedIn} />
+            (props) =>(
+              <MyAccount {...props} isLoggedIn = {this.isLoggedIn} />
             )
           } 
         />
@@ -121,6 +140,10 @@ class App extends Component {
         <Route 
           path =  '/CreatePost/:categoryID' 
           component = {CreatePost}
+        />  
+        <Route 
+          path =  '/CreateCategory' 
+          component = {CreateCategory}
         />  
       </div>
       </Router>

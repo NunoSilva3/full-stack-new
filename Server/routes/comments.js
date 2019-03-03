@@ -4,7 +4,7 @@ var router 		  = require('express').Router(),
 
 
     router.get('/:postID', controller.find);
-    router.get('/find/:userID', isLoggedIn, controller.find_by_user);
+    router.get('/find/user', isLoggedIn, controller.find_by_user);
     router.post('/create', isLoggedIn,  controller.create)
     router.post('/update', isLoggedIn, controller.update)
     router.post('/delete', isLoggedIn, controller.deleteComment)

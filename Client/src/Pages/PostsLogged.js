@@ -1,8 +1,44 @@
 import React from 'react';
-import {posts} from '../mockarray';
+import axios from 'axios';
 import {NavLink} from 'react-router-dom'
 
 export default class PostsPage extends React.Component{
+state = {
+    keyword: '',
+    posts: []
+
+}
+
+
+componentDidMount(){
+
+    this.handleSubmit()
+
+}
+
+
+handleOnchange = e =>{
+
+this.setState({[e.target.name]:e.target.value})
+
+}
+
+handleSubmit = e => {
+   e ? e.preventDefault() : null
+    
+    var url = `http://localhost:3003/posts/Search_Posts/${this.state.keyword || "all"}`
+    axios.get(url)
+    .then ((res)=>{
+      debugger
+        this.setState({posts:res.data})               
+    })
+    .catch((error)=>{
+         
+    })
+
+}
+    
+    
 
 
 render(){
@@ -10,12 +46,24 @@ render(){
 
     return (
 
-        <div>
+        <div style={{marginTop:"100px"}}>
+
+            <form style={{ textAlign: "center"}}
+            onSubmit={this.handleSubmit}>
+            <input onChange={this.handleOnchange}
+                    style={{ textAlign: "center"}}
+                    name ='keyword' 
+                    value ={this.state.keyword} 
+                    placeholder='Search posts'
+                /><br></br>
+                <button>Search</button>
+            </form>
 
             <div>
             
+            
                 <ul className='FullPageGrid'>
-                    { posts.map( ele =>{                       
+                    { this.state.posts.map( ele =>{                       
                        return <li> <NavLink to={`/post/${ele._id}`}><h2>{ele.title}</h2><p>{ele.body}</p></NavLink> </li>          
                     })}
                 </ul>

@@ -1,40 +1,83 @@
 import React from 'react';
-import {users} from '../mockarray'
 import {NavLink} from 'react-router-dom';
+import axios from 'axios';
+import UploadImages from '../UploadImages';
 
 
 export default class MyAccount extends React.Component{
   
     state={
-        username:'My Name', 
-        password:'My Password',
-        email: '@email.mock',
-        _id: 64654654654,
-        photo: '',
+        username:'', 
+        email: '',
+        profilePhoto: '',
         nickname:'',
         moto: '',
     }
-  
-  
+
+
+    componentDidMount(){
+        
+        var url = `http://localhost:3003/users/user`
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('authToken');
+        axios.get(url)
+        .then ((res)=>{
+          debugger
+            this.setState({
+                username:res.data.username, 
+                email: res.data.email,
+                profilePhoto: res.data.profilePhoto,
+                nickname: res.data.nickname,
+                moto: res.data.moto,
+            })              
+        })
+        .catch((error)=>{
+            debugger
+             console.log(error)
+        })
+    }
+
     handleChange = e => this.setState({[e.target.name]:e.target.value})
     handleSubmit = e => {
-        e.preventDefault()
-        users.push(this.state)
-        localStorage.setItem("token", "token")
-        this.props.isLoggedIn(true)
-        this.setState({[e.target.name]:""})
-        
+     e.preventDefault()
+     var url = `http://localhost:3003/users/update`
+     axios.defaults.headers.common['Authorization'] = localStorage.getItem('authToken');
+     axios.post(url, this.state)
+     .then ((res)=>{
+         this.setState({
+            username:res.data.username, 
+            email: res.data.email,
+            profilePhoto: res.data.profilePhoto,
+            nickname: res.data.nickname,
+            moto: res.data.moto,
+        })           
+         })
+         .catch((error)=>{
+            debugger
+            console.log(error)
+
+        })
     }
+    getData = e =>{
+        debugger
+        console.log('PROOOOOOPS=======>', e)
+        this.setState({profilePhoto:e})
+
+    }
+
 render(){
 
 
 return (
 <div>
     <div className='myAccountgrid'>
-        <NavLink to={`/MyPosts/${this.state._id}`}> My Posts</NavLink>
-        <NavLink to='/MyComments'> My Comments</NavLink>
+        <NavLink to={`/MyPosts`}> My Posts</NavLink>
+        <NavLink to={`/MyComments`}> My Comments</NavLink>
+        <NavLink to='/MyCategories'> My Categories</NavLink>
     </div>
         <div className='myAccountgrid'>
+                <div>
+                        
+                </div>
             <div>
                 <h3>Edit your account</h3>
                 <form onChange = {this.handleChange}
@@ -42,14 +85,8 @@ return (
                         className="register_form">
                     <input name ='username' 
                             value ={this.state.username} 
-                            placeholder="Your Name">
+                            placeholder="Your Username">
 
-                    </input>
-                    <input name ='password' 
-                            value ={this.state.password} 
-                            placeholder="Your password"
-                            >
-                            
                     </input>
                     <input name ='email' 
                             value ={this.state.email} 
@@ -66,42 +103,10 @@ return (
                             placeholder="Your moto">
 
                     </input>
+                    <img src={this.state.profilePhoto}></img>
                     <button>TO BE HIDDEN</button>
                 </form>
-            </div>
-            <div>
-                <h3>Edit your privacy</h3>
-                <form onChange = {this.handleChange}
-                        onSubmit = {this.handleSubmit} 
-                        className="register_form">
-                    <input name ='username' 
-                            value ={this.state.username} 
-                            placeholder="Your Name">
-
-                    </input>
-                    <input name ='password' 
-                            value ={this.state.password} 
-                            placeholder="Your password"
-                            >
-                            
-                    </input>
-                    <input name ='email' 
-                            value ={this.state.email} 
-                            placeholder="Your Email">
-
-                    </input>
-                    <input name ='nickname' 
-                            value ={this.state.nickname} 
-                            placeholder="Your nickname">
-
-                    </input>
-                    <input name ='moto' 
-                            value ={this.state.moto} 
-                            placeholder="Your moto">
-
-                    </input>
-                    <button>TO BE HIDDEN</button>
-                </form>
+                <UploadImages getData={this.getData}/>
             </div>
         </div>
 </div>
@@ -109,4 +114,4 @@ return (
 
 
 }
-}
+    }

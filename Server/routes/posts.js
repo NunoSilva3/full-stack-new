@@ -3,12 +3,12 @@ var router 		  = require('express').Router(),
     isLoggedIn	  = require('../middlewares/isLoggedIn');
 
 
-    router.get('/Search_Posts', controller.find);
+    router.get('/Search_Posts/:keyword', controller.find);
     router.get('/posts/:PostID',controller.find_single_post);
     router.get('/category/:categoryID',controller.find_by_cat);
-    router.get('/user/:userID', controller.find_by_user);
-    router.post('/create', controller.create)
-    router.post('/delete', controller.deletePost)
+    router.get('/user', isLoggedIn, controller.find_by_user);
+    router.post('/create', isLoggedIn, controller.create)
+    router.post('/delete', isLoggedIn, controller.deletePost)
 
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {categories} from '../mockarray';
+
 import {NavLink} from 'react-router-dom'
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ export default class CategoriesPage extends React.Component{
       }
 
     componentDidMount(){
+        debugger
         var url = `http://localhost:3003/categories/showall`
         axios.get(url)
         .then ((res)=>{
@@ -24,6 +25,7 @@ export default class CategoriesPage extends React.Component{
 
 
 render(){
+    
 
 return (
 

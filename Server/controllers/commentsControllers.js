@@ -1,6 +1,18 @@
 const Comments = require('../models/Comments')
 
 class CommentsController {
+    async find_by_user(req,res) {
+        try{
+            console.log(' USEEEERRRRRRR', req.user)
+            const userComments = await Comments.find({user_id: req.user._id})
+            res.send({userComments})
+
+        }
+        catch(error){
+            res.send(error)
+        }
+
+    }
 
     async find(req, res) {
         let {postID} = req.params
@@ -13,21 +25,9 @@ class CommentsController {
             res.send(error)
         }
     }
-    async find_by_user(req,res) {
-        let{ userID } = req.params;
-        try{
-            const userComments = await Comments.find({user_id: userID})
-            res.send({userComments})
-
-        }
-        catch(error){
-            res.send(error)
-        }
-
-    }
+    
     async create(req,res){
-        console.log(' BOOOODDDDDDYYYYYYY', req.body)
-            let{ post_id, userID, body } =  req.body
+            let{ post_id, body } =  req.body
 
             try{
                 const newComment = await Comments.create({
@@ -37,7 +37,7 @@ class CommentsController {
                    user_id:req.user._id,
            
            })
-               res.send({message:"Great Job!!"})
+               res.send({message:"Great Job!!"}, newComment)
             }
             catch(error){
                 console.log("e r r o r ",error)

@@ -1,12 +1,13 @@
 import React from 'react'
 import widgetStyle from './widgetStyle';
+import axios from 'axios';
 
 
 export default class UploadImages extends React.Component{
 
 
 	uploadWidget = () => {
-        debugger
+        
         window.cloudinary.openUploadWidget({ 
         	cloud_name: 'nuno3', 
         	upload_preset: 'od10bb08', 
@@ -14,10 +15,24 @@ export default class UploadImages extends React.Component{
 			stylesheet:widgetStyle
         },
             (error, result)=> {
-				debugger
                 if(error){
-					debugger
+					
                 }else{
+										function gcd (a, b) {
+											return (b == 0) ? a : gcd (b, a%b);
+										}
+										var w = result[0].width;
+										var h = result[0].height;
+										var r = gcd (w, h);
+										var aspect_ratio = parseFloat((w/r) +  "." + (h/r));
+
+										if(/*aspect_ratio !== 16.9 || */w < 299 || h < 299) return async function(){
+											var url = 'http://localhost:3003/images/delete'
+											await axios.post(url,
+												{
+													public_id: result[0].public_id
+												})
+										}()
 									
 					fetch('http://localhost:3003/images/upload', {
 						method: 'POST',
@@ -31,9 +46,10 @@ export default class UploadImages extends React.Component{
 						}),
 						}).then((response) => response.json())
 							.then((responseJson) => {
+
 								this.props.getData(result[0].secure_url)
 						}).catch((e)=>{
-							debugger
+							
 						})
 							  
                 }

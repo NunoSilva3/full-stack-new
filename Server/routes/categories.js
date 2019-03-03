@@ -4,8 +4,9 @@ var router 		  = require('express').Router(),
 
 
     router.get('/showAll', controller.showAll);
-    router.post('/create', controller.create)
-    router.post('/delete', controller.deleteCategory)
+    router.get('/user', isLoggedIn, controller.find_by_user);
+    router.post('/create', isLoggedIn, controller.create)
+    router.post('/delete', isLoggedIn, controller.deleteCategory)
 
 
 

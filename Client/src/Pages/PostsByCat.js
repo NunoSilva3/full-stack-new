@@ -1,21 +1,22 @@
 import React from 'react';
-import {posts} from '../mockarray';
 import {NavLink} from 'react-router-dom';
 import axios from 'axios'
 
 
-export default class SinglePostPage extends React.Component{
+export default class PostPage extends React.Component{
    state={
 
     arr : [],
 
    }
-
+   componentWillMount(){
+       console.log('PROPSSSSSSSSS',this.props)
+   }
    
     componentDidMount(){
+        debugger
         
-        
-        var url = `http://localhost:3003/posts/category/${this.props.match.params.categoryID}`
+        var url = `http://localhost:3003/posts/category/${this.props.match.params._id}`
         axios.get(url)
         .then ((res)=>{
           
@@ -30,11 +31,11 @@ export default class SinglePostPage extends React.Component{
     render(){
         
         
+        
         return (
             
 
-        <div>
-                <h2 id='CreatePost'><NavLink to={`/CreatePost/${this.props.match.params.categoryID}`}>Click Here to create your post</NavLink></h2>
+
             <div>
             
                 <ul className='FullPageGrid'>
@@ -45,14 +46,8 @@ export default class SinglePostPage extends React.Component{
                 
             </div>    
                 
-        </div>
+
         
         )}
         
-
-
-    
-
-
-
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { posts } from '../mockarray';
 import axios from 'axios';
 import UploadImages from '../UploadImages';
 
@@ -10,7 +9,6 @@ export default class CreatePost extends React.Component{
 		title:'',
 		body:'',
 		categoryID:'',
-		userID:'',
         photo_url:'',
         confirmation:'',
 }
@@ -28,22 +26,31 @@ export default class CreatePost extends React.Component{
     handleSubmit = e => { 
         e.preventDefault()
         var url = `http://localhost:3003/posts/create`
+        axios.defaults.headers.common['Authorization'] = localStorage.getItem('authToken');
         axios.post(url, 
             {
                 title: this.state.title,
                 body: this.state.body,
                 categoryID: this.state.categoryID,
-                userID: this.state.userID,
                 photo_url: this.state.photo_url,
         }
             )
         .then ((res)=>{
-            
-            this.setState({confirmation:res.data.newPost.title})
+            debugger
+            if(res.data.error){
+                this.setState({confirmation:"something went wrong."})       
+            }
+            else{
+                this.setState({confirmation:"Post Created!"})    
+            }
+
 
         })
         .catch((error)=>{
+            debugger
             console.log(error)
+            this.setState({confirmation:"something went wrong..."})
+
 
         })
 
@@ -77,7 +84,7 @@ export default class CreatePost extends React.Component{
                 <button>Create!</button>              
             </form>
             <UploadImages getData={this.getData}/>
-            <alert>{`Post ${this.state.confirmation} created`}</alert>
+            <p>{this.state.confirmation}</p>
             </div>
         )
 

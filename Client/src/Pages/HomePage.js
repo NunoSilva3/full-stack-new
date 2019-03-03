@@ -11,10 +11,11 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
+    
             var url = `http://localhost:3003/categories/showall`
             axios.get(url)
             .then ((res)=>{
-              
+              debugger
                 this.setState({categories:res.data})               
             })
             .catch((error)=>{
@@ -52,7 +53,7 @@ class HomePage extends Component {
         </div>
       );
     }
-    return <h1>IS LOADING!</h1>
+    return <h1 className="isLoading">IS LOADING!</h1>
   }
 }
 export default HomePage;

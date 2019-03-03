@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { categories } from '../mockarray';
 import {NavLink} from 'react-router-dom';
 import axios from 'axios'
 
@@ -45,13 +44,13 @@ class HomePage extends Component {
           <h1 id="HomeCatName">{categories[index].name}</h1>
         <div className='homepagepic'>
           <span><i onClick={prevImage} className="fas fa-chevron-left fa-3x"></i></span>
-          <NavLink to={`/posts/${categories[index]._id}`}><img src = {categories[index].photoUrl}/> </NavLink>
+          <div className="banana"><NavLink to={`/posts/${categories[index]._id}`}><img src = {categories[index].photoUrl}/> </NavLink></div>
           <span><i onClick={nextImage} className="fas fa-chevron-right fa-3x"></i></span>
         </div>
         </div>
       );
     }
-    return <h1>IS LOADING!</h1>
+    return <h1 className="isLoading">IS LOADING!</h1>
   }
 }
 export default HomePage;

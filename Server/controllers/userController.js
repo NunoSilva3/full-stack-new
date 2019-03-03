@@ -6,10 +6,25 @@ class UserController {
     find(req,res){
         User.find({},(err, users)=> !err ? res.status(200).send(users) : {err});
     }
+    async findOne(req,res){
+        let { _id} = req.user
+
+        try {
+            const user = await User.findOne({_id})
+            res.send(user)
+        } catch (error) {
+            console.log(error)
+        }
+       
+
+       
+    }
     register(req, res, next) {
+        console.log('REGISTER BODDDDYYYYYYYY',req.body)
         const {username, password, email} = req.body
         if(!username || !password|| !email) return res.status(422).send({error: 'username, email and password are mandatory!' });
         User.findOne({username:username},(err, existingUser)=>{
+            if(err) return console.log(err)
             if(err) return next(err)
             if(existingUser) {
                 return res.status(422).send({error: 'username already exists !!' })
@@ -21,6 +36,7 @@ class UserController {
             })
                 console.log(user)
             user.save(function(err){
+                if(err) return console.log(err)
                 if(err) return next(err)
                 var token = jwt.sign(user.toJSON(), config.secret,{
                     expiresIn:100080
@@ -38,8 +54,10 @@ class UserController {
             return res.status(422).send({error: 'username and password are mandatory!' })
         }
         User.findOne({username},(err, user) => {
+            if(err) return console.log(err)
             if(err) return next(err)
             if(!user) {
+                console.log(err)
                 return res.status(422).send({error: 'no one by that username here' })
             }
             user.comparePassword(password,(err, match)=>{
@@ -53,14 +71,15 @@ class UserController {
         })
     }
     async update (req,res){
-        const { username ,password, email, nickName, profilePhoto , moto} = req.body;
+        console.log('USERRRRRRRRRRRR',req.user)
+        const { username , email, nickName, profilePhoto , moto} = req.body;
         const user = req.user
         try{
             const update = await User.updateOne({_id : user._id },
                         {
                         $set:{
                             username:username,
-                            password:password,
+                            password:user.password,
                             email:email,
                             nickName:nickName,
                             profilePhoto:profilePhoto,
@@ -68,11 +87,13 @@ class UserController {
                             }
                         }      
             )  
-            res.send({update})
+            console.log('UPDATE SUCCESS',update)
+            if (update.ok > 0) res.send(req.body)
             }
         
         
          catch(error){
+             console.log('E R R O R UPDATE',error)
              res.send({error})
          } 
 

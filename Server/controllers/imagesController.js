@@ -1,4 +1,7 @@
 const Images = require('../models/Images')
+const cloudinary = require ('cloudinary');
+
+
 
 class ImagesController {
 
@@ -31,9 +34,21 @@ class ImagesController {
  
         res.send(error)
     }
+}
+
+    async delete(req, res){
+        console.log("======================  * * ======================", req.body)
+        try{
+            const removed = await cloudinary.v2.api.delete_resources([req.body.public_id])
+            console.log(" r e m o v e d", removed)
+        }
+        catch(error){
+            console.log("the e r r o r ",error)
+        }
+    }
 
     
-}
+
 
 }
 module.exports = new ImagesController();

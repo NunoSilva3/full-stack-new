@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 
 const postsSchema = new mongoose.Schema({
-		title:String,
-		body:String,
-		category_id:String,
-		user_id:String,
+		title:{type: String, required : true},
+		body:{type: String, required : true},
+		category_id:{type: String, required : true},
+		user_id:{type: String, required : true},
 		photo_url:String,
 })
 

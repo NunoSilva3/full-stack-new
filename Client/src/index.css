@@ -12,11 +12,14 @@ body{
     background: transparent;
     border: 1px solid white;
     margin: 1px;
+    font-size: 140%;
+    text-align: center;
+    
   
   }
   .formStyle button{
   
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(126,126,242,1) 35%, rgba(0,212,255,1) 100%); 
+    background: transparent;
     border-radius: 50px;
     border: transparent;
     margin-top: 3px;
@@ -24,11 +27,13 @@ body{
   .register_form {
     display: flex;
     flex-direction: column;
-    width:20%;
+    width:40%;
     margin:auto;
     border:1px solid #ddd;
     padding:20px;
     margin-top: 15%;
+
+    
   }
   
   .register_form  input, button{
@@ -41,14 +46,27 @@ body{
     background: rgb(77, 193, 247);
   }
 .homepagepic {
-  height: 74vh;
+  /* height: 74vh; */
   width: 74vw;
   display: flex;
   margin-left: auto;
   margin-right: auto;
 }
+.homepagepic a{
+  display: block;
+  width: 100%;
+}
+.banana{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  margin: auto;
+}
 .homepagepic img{
-  max-width: 100%;
+  width: 60%;
+  margin-left: 20%;
+
 }
 .homepagepic a{
 margin: auto;
@@ -63,6 +81,7 @@ i {
   text-align: center;
   margin-top: 70px;
 }
+
 .FullPageGridCat{
   height: 75vh;
   width: 75vw;
@@ -70,7 +89,7 @@ i {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10%;
-  grid-gap: 1%;
+  grid-gap: 5%;
   grid-template-columns: 1fr 1fr 1fr;
   text-align: center;
   padding: 0
@@ -125,7 +144,9 @@ i {
 
 #CreatePost{
 text-align: center;
-margin-top: 10%
+margin-top: 10%;
+border:1px solid #ddd;
+
 }
 .CreatePost{
   width:20%;
@@ -133,6 +154,13 @@ margin-top: 10%
   border:1px solid #ddd;
   padding:20px;
   margin-top: 15%;
+}
+.CreatePost Button {
+  border:12px solid #ddd;
+  margin-top: 25%;
+
+
+
 }
 .lines{
   display: -webkit-box;
@@ -153,9 +181,9 @@ margin-top: 10%
   display: grid;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15%;
+  margin-top: 10%;
   grid-gap: 1%;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   text-align: center;
 
 }
@@ -166,4 +194,83 @@ margin-top: 10%
 }
 .comments_grid:{
   display: grid;
+}
+.isLoading{
+  text-align: center;
+  margin-top: 15%;
+  border: 1px solid #ddd;
+}
+
+@media only screen and (max-width: 450px) {
+  body {
+    background-color: lightblue;
+  }
+
+  .myAccountgrid{
+
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    grid-gap: 1%;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+  
+  }
+  #CreatePost{
+    text-align: center;
+    margin-top: 20%;
+    border:1px solid #ddd;
+    
+    }
+    .FullPageGrid{
+      height: 75vh;
+      width: 75vw;
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20%;
+      grid-gap: 5%;
+      /* grid-template-columns: 1fr 1fr 1fr; */
+      justify-content: space-around;
+      text-align: center;
+      padding: 0;
+      flex-wrap: wrap
+    
+    }
+    .homepagepic {
+       height: 74vh; 
+      width: 74vw;
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .homepagepic a{
+      display: block;
+      width: 100%;
+    }
+    .banana{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      margin: auto;
+    }
+    .homepagepic img{
+      width: 40%;
+      margin-left: 30%;
+    
+    }
+    .homepagepic a{
+    margin: auto;
+    }
+    .homepagepic span{
+    margin: auto
+    }
+    i {
+      cursor: pointer
+    }
+
+  
+  
 }

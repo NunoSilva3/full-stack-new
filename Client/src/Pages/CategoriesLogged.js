@@ -24,11 +24,14 @@ export default class CategoriesPage extends React.Component{
 
 
 render(){
+    
 
 return (
 
 <div>
-
+    <div>
+    <h2 id='CreatePost'><NavLink to={`/CreateCategory`}>Click Here to create a new category</NavLink></h2>
+    </div>
     <div>
         <ul className='FullPageGridCat'>
             { this.state.categories.map( ele =>{

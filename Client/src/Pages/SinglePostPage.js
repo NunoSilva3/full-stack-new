@@ -84,23 +84,62 @@ export default class SinglePostPage extends React.Component{
 
     render(){
         console.log(this.state)
+
+        if(!this.state.postPhoto_url){
+
+            return (
+            
+                <div>  
+                    
+                    <div>
+                        <ul className='SinglePostPage'>                    
+                            <li> <h2>{this.state.postTitle}</h2><p>{this.state.postBody}</p> </li>                           
+                        </ul>
+                    </div>
+                    <form
+                        onChange={this.handleChange}
+                        onSubmit={this.handleSubmit}
+                        className="commentform"
+                        >
+                        <input name='newcommentbody'
+                        value={this.state.newcommentbody}
+                        placeholder='Type your comment here'>
+                        
+                        </input>
+                        <button>Comment</button>
+                    </form>     
+                    <div>
+                        <ul className='comments_grid'>
+                            {
+                                this.state.comments.map((ele, i)=> <li className="card"> {ele.body} </li> )         
+                            }
+                        </ul>
+                    </div>            
+                </div>
+            )
+
+        }
+
         return (
+            
             <div>  
+                
                 <div>
-                    <ul className='FullPageGrid'>                    
-                        <li> <h2>{this.state.postTitle}</h2><p>{this.state.postBody}</p> </li>                           
+                    <ul className='SinglePostPage'>                    
+                        <li> <h2>{this.state.postTitle}</h2><img src={this.state.postPhoto_url}></img><p>{this.state.postBody}</p> </li>                           
                     </ul>
                 </div>
-                <form onChange={this.handleChange}
+                <form
+                    onChange={this.handleChange}
                     onSubmit={this.handleSubmit}
-                    className="register_form"
+                    className="commentform"
                     >
                     <input name='newcommentbody'
                     value={this.state.newcommentbody}
                     placeholder='Type your comment here'>
                     
                     </input>
-                    <button>CREATE!!</button>
+                    <button>Comment</button>
                 </form>     
                 <div>
                     <ul className='comments_grid'>

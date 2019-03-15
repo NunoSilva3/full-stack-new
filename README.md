@@ -1,4 +1,4 @@
-# full-stack-new
+# full-stack
 
 fast, modern,dynamic and responsive blog. The app has the front end built
 with React JS and the backend with Node.js (Express) and MongoDB.

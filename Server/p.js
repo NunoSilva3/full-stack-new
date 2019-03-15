@@ -1,1 +1,0 @@
-exports.pwd = 'Passgmail3';

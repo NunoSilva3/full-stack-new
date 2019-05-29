@@ -2,6 +2,13 @@ body{
   font-family: 'Bree Serif', serif !important;
 
 }
+#Searchb{
+ 
+  width: 25%;
+  border-radius: 25px;
+  margin-top: 3px;
+
+}
 #react_textcenter{
   text-align: center;
   -webkit-text-fill-color: red
@@ -249,7 +256,7 @@ border:1px solid #ddd;
   padding: 2rem;
   border: 1px solid #ddd;
 }
-.comments_grid:{
+.comments_grid{
   display: grid;
 }
 .isLoading{

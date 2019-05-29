@@ -1,6 +1,4 @@
 import React from 'react';
-import {posts, comments, categories} from '../mockarray';
-import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 
 

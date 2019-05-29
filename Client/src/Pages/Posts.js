@@ -56,7 +56,7 @@ render(){
                     value ={this.state.keyword} 
                     placeholder='Search posts'
                 /><br></br>
-                <button>Search</button>
+                <button id='Searchb'>Search</button>
             </form>
 
             <div>

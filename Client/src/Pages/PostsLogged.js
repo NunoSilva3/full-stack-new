@@ -46,17 +46,17 @@ render(){
 
     return (
 
-        <div style={{marginTop:"100px"}}>
+        <div style={{marginTop:"100px" }}>
 
             <form style={{ textAlign: "center"}}
             onSubmit={this.handleSubmit}>
             <input onChange={this.handleOnchange}
-                    style={{ textAlign: "center"}}
+                    style={{ textAlign: "center", width: '25%', height: 50}}
                     name ='keyword' 
                     value ={this.state.keyword} 
                     placeholder='Search posts'
                 /><br></br>
-                <button>Search</button>
+                <button id='Searchb'>Search</button>
             </form>
 
             <div>
